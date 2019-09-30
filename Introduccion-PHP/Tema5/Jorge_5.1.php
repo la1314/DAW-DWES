@@ -75,15 +75,19 @@
     function esPrimo($number) {
         $cont=0;
         
-        for($i = 2; $i <= $number; $i++) {
+        $i = 2;
 
+        while ($i <= $number) {
+            
             if($number % $i == 0) {
                 
-                if(++$cont > 1)
+                if( ++$cont > 1 )
 
                     return false;
 
             }
+
+            $i++;
         }
         
         return true;
