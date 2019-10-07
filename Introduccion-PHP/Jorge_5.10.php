@@ -31,6 +31,8 @@
             $tamañoMapa=10;
             $rebotes = 1;
             $direccion;
+            $pelotaX;
+            $pelotaY;
             # Posicionar la paloma
            
             do
@@ -42,78 +44,122 @@
             # y su casa disten como mínimo la mitad del mapa. La función abs() devuelve el valor
             # absoluto, esto es, la cifra sin signo.
            
+            
+            
 
-            $direccion = conseguirdireccion();
+            while ($rebotes < 7) {
 
-            do
-            {   
+                $ndireccion = 0;
 
-                #Acercar la paloma a su casa
-                if ($pelotaX<$casaX)
-                    $pelotaX++;
-                elseif ($pelotaX>$casaX)
-                    $pelotaX--;
-   
+                echo($pelotaX);
+                echo($pelotaY);
 
-                if ($pelotaY<$casaY)
-                    $pelotaY++;
-                elseif ($pelotaY>$casaY)
-                    $pelotaY--;
+                 //Nord-Este
+                if ( ($pelotaY-1) >= 0 && ($pelotaX-1) >= 0 ) {
+                    $ndireccion = 1;
 
-                switch ($direccion) {
-                    case '1':
-                        # code...
-                        break;
-                    case '2':
-                        # code...
-                        break;
-                    case '3':
-                        # code...
-                        break;
-                    case '4':
-                        # code...
-                        break;
-                
+                    //Sur-Este
+                } elseif ( ($pelotaY-1) >= 0 && ($pelotaX+1) <= ($tamañoMapa-1) ) {
+                    $ndireccion = 2;
+
+                    //Nord-Oeste
+                }elseif ( ($pelotaY+1) <= ($tamañoMapa-1) && ($pelotaX-1) >= 0) {
+                    $ndireccion = 3;
+                    
+                    //Sur-Oeste
+                }elseif ( ($pelotaY+1) <= ($tamañoMapa-1) && ($pelotaX-1) <= ($tamañoMapa-1)) {
+                    $ndireccion = 4;
                 }
 
+                $direccion = $ndireccion;
+                $rebotamos = true;
+
+                do
+                {   
+    
+                    switch ($direccion) {
+                        case 1:
+                        if ( ($pelotaY-1) >= 0 ) {
+                            $pelotaY -= 1;
+                            $pelotaX -= 1;
+                        }else {
+                            $rebotamos = false;
+                        }
+                            break;
+                        case 2:
+                        if ( ($pelotaY - 1) >= 0 ) {
+                            $pelotaY -= 1;
+                            $pelotaX += 1;
+                        }else {
+                            $rebotamos = false;
+                        }
+                            break;
+                        case 3:
+                        if ( ($pelotaY + 1) >= $tamañoMapa-1 ) {
+                            $pelotaY += 1;
+                            $pelotaX -= 1;
+                        }else {
+                            $rebotamos = false;
+                        }
+                            break;
+                        case 4:
+                        if ( ($pelotaY + 1) >= $tamañoMapa-1 ) {
+                            $pelotaY += 1;
+                            $pelotaX += 1;
+                        }else {
+                            $rebotamos = false;
+                        }
+                            break;
+                    
+                    }
+    
+                       
+                    #Mostrar el mapa actual
+                    echo '<div class="map" style="width: ' . $tamañoMapa . 'em;"><pre>';
+                    # Recuérdese que con la etiqueta <pre> los saltos de línea que haya se reflejan en la pantalla
                    
-                #Mostrar el mapa actual
-                echo '<div class="map" style="width: ' . $tamañoMapa . 'em;"><pre>';
-                # Recuérdese que con la etiqueta <pre> los saltos de línea que haya se reflejan en la pantalla
-               
-                for ($y=0; $y<$tamañoMapa; $y++)
-                {
-                    for ($x=0; $x<$tamañoMapa; $x++)
+                    for ($y=0; $y<$tamañoMapa; $y++)
                     {
-                       
-                        if ($x == $pelotaX && $y == $pelotaY)
+                        for ($x=0; $x<$tamañoMapa; $x++)
                         {
-                            echo '<span class="paloma">0</span>'; #Pelota
-                        }
-                        else
-                        {
-                            echo '<span class="aire">.</span>'; #Aire
+                           
+                            if ($x == $pelotaX && $y == $pelotaY)
+                            {
+                                echo '<span class="paloma">0</span>'; #Pelota
+                            }
+                            else
+                            {
+                                echo '<span class="aire">.</span>'; #Aire
+                            }
+                           
+                            echo ($x != $tamañoMapa -1) ? " " : ""; #siempre se añade un carácter de espacio en cada celda, salvo al final.
                         }
                        
-                        echo ($x != $tamañoMapa -1) ? " " : ""; #siempre se añade un carácter de espacio en cada celda, salvo al final.
+                        echo "\n"; #Salto de línea. como se está dentro de un <pre>, se reflejará en la pantalla.
                     }
                    
-                    echo "\n"; #Salto de línea. como se está dentro de un <pre>, se reflejará en la pantalla.
-                }
-               
-                echo "</pre>pelotax=$pelotaX pelotaY=$pelotaY</div>\n";
-            } while ( $rebotes < 6 );
+                    echo "</pre>pelotax=$pelotaX pelotaY=$pelotaY</div>\n";
+                
+                    
+                
+                } while ( $rebotamos );
+
+                $rebotes++;
+            }
             
+
+            ##########################################
             function conseguirdireccion(){
-
+            
             $ndireccion = 0;
-
+            
+            
                  //Nord-Este
              if ( ($pelotaY-1) >= 0 && ($pelotaX-1) >= 0 ) {
                 $ndireccion = 1;
 
                  //Sur-Este
-             } elseif ( ($pelotaY-1) >= 0 && ($pelotaX+1) >= ($tamañoMapa-1) ) {
+             } elseif ( ($pelotaY-1) >= 0 && ($pelotaX+1) <= ($tamañoMapa-1) ) {
                 $ndireccion = 2;
 
                  //Nord-Oeste
@@ -121,7 +167,7 @@
                 $ndireccion = 3;
                 
                 //Sur-Oeste
-             }elseif ( ($pelotaY+1) <= ($tamañoMapa-1) && ($pelotaX-1) >= ($tamañoMapa-1)) {
+             }elseif ( ($pelotaY+1) <= ($tamañoMapa-1) && ($pelotaX-1) <= ($tamañoMapa-1)) {
                 $ndireccion = 4;
              }
              
@@ -153,7 +199,7 @@
 
             function surOeste(){
                 if ( $pelotaY + 1 >= $tamañoMapa-1 ) {
-                    $pelotaY -= 1;
+                    $pelotaY += 1;
                     $pelotaX += 1;
                 }
             }
