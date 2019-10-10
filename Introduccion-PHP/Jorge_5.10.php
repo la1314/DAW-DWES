@@ -54,15 +54,15 @@
                     $ndireccion = 1;
 
                     //Sur-Este
-                } elseif ( ($pelotaX-1) >= 0 && ($pelotaY+1) <($tamañoMapa) ) {
+                } elseif ( ($pelotaX-1) >= 0 && ($pelotaY+1) < $tamañoMapa ) {
                     $ndireccion = 2;
 
                     //Nord-Oeste
-                }elseif ( ($pelotaX+1) < ($tamañoMapa) && ($pelotaY-1) > 0) {
+                }elseif ( ($pelotaX+1) < $tamañoMapa && ($pelotaY-1) >= 0) {
                     $ndireccion = 3;
                     
                     //Sur-Oeste
-                }elseif ( ($pelotaX+1) < ($tamañoMapa) && ($pelotaY-1) < ($tamañoMapa)) {
+                }elseif ( $pelotaX+1 < $tamañoMapa && ($pelotaY+1) < $tamañoMapa) {
                     $ndireccion = 4;
                 }
 
