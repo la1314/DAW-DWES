@@ -28,7 +28,7 @@
         <h1>
             <?php
 
-            $tamañoMapa=10;
+            $tamañoMapa=5;
             $rebotes = 1;
             $direccion;
             $pelotaX;
@@ -45,29 +45,24 @@
             # absoluto, esto es, la cifra sin signo.
            
             
-            
+            $ndireccion = 0;
 
             while ($rebotes < 7) {
 
-                $ndireccion = 0;
-
-                echo($pelotaX);
-                echo($pelotaY);
-
                  //Nord-Este
-                if ( ($pelotaY-1) >= 0 && ($pelotaX-1) >= 0 ) {
+                if ( ($pelotaX-1) >= 0 && ($pelotaY-1) >= 0 ) {
                     $ndireccion = 1;
 
                     //Sur-Este
-                } elseif ( ($pelotaY-1) >= 0 && ($pelotaX+1) <= ($tamañoMapa-1) ) {
+                } elseif ( ($pelotaX-1) >= 0 && ($pelotaY+1) <($tamañoMapa) ) {
                     $ndireccion = 2;
 
                     //Nord-Oeste
-                }elseif ( ($pelotaY+1) <= ($tamañoMapa-1) && ($pelotaX-1) >= 0) {
+                }elseif ( ($pelotaX+1) < ($tamañoMapa) && ($pelotaY-1) > 0) {
                     $ndireccion = 3;
                     
                     //Sur-Oeste
-                }elseif ( ($pelotaY+1) <= ($tamañoMapa-1) && ($pelotaX-1) <= ($tamañoMapa-1)) {
+                }elseif ( ($pelotaX+1) < ($tamañoMapa) && ($pelotaY-1) < ($tamañoMapa)) {
                     $ndireccion = 4;
                 }
 
@@ -79,7 +74,7 @@
     
                     switch ($direccion) {
                         case 1:
-                        if ( ($pelotaY-1) >= 0 ) {
+                        if ( $pelotaX > 0 && $pelotaY >= 0 ) {
                             $pelotaY -= 1;
                             $pelotaX -= 1;
                         }else {
@@ -87,25 +82,25 @@
                         }
                             break;
                         case 2:
-                        if ( ($pelotaY - 1) >= 0 ) {
-                            $pelotaY -= 1;
-                            $pelotaX += 1;
+                        if ( ($pelotaX) > 0 && $pelotaY < $tamañoMapa ) {
+                            $pelotaX -= 1;
+                            $pelotaY += 1;
                         }else {
                             $rebotamos = false;
                         }
                             break;
                         case 3:
-                        if ( ($pelotaY + 1) >= $tamañoMapa-1 ) {
-                            $pelotaY += 1;
-                            $pelotaX -= 1;
+                        if ( ($pelotaX) < $tamañoMapa && $pelotaY > 0) {
+                            $pelotaX += 1;
+                            $pelotaY -= 1;
                         }else {
                             $rebotamos = false;
                         }
                             break;
                         case 4:
-                        if ( ($pelotaY + 1) >= $tamañoMapa-1 ) {
-                            $pelotaY += 1;
+                        if ( ($pelotaX) < $tamañoMapa && ($pelotaY) < $tamañoMapa) {
                             $pelotaX += 1;
+                            $pelotaY += 1;
                         }else {
                             $rebotamos = false;
                         }
@@ -118,11 +113,13 @@
                     echo '<div class="map" style="width: ' . $tamañoMapa . 'em;"><pre>';
                     # Recuérdese que con la etiqueta <pre> los saltos de línea que haya se reflejan en la pantalla
                    
+
+
                     for ($y=0; $y<$tamañoMapa; $y++)
                     {
                         for ($x=0; $x<$tamañoMapa; $x++)
                         {
-                           
+
                             if ($x == $pelotaX && $y == $pelotaY)
                             {
                                 echo '<span class="paloma">0</span>'; #Pelota
@@ -138,7 +135,7 @@
                         echo "\n"; #Salto de línea. como se está dentro de un <pre>, se reflejará en la pantalla.
                     }
                    
-                    echo "</pre>pelotax=$pelotaX pelotaY=$pelotaY</div>\n";
+                    echo "</pre>pelotax=$pelotaX pelotaY=$pelotaY rebote nº=$rebotes</div>\n";
                 
                     
                 
