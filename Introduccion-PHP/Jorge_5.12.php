@@ -64,8 +64,6 @@
         $desplazamientos = $diferencial;
         $booleanDesplazar = true;
 
-
-
         for ($col = 0; $col < $tamañoMapa; $col++) {
 
             if ($col < ($tamañoMapa / 3)) {
@@ -108,8 +106,6 @@
             $ndireccion = 4;
         }
 
-
-
         //Nord-Este
         if ($pelota2X - 1 >= 0 && $pelota2Y - 1 >= 0) {
             $ndireccion2 = 1;
@@ -147,7 +143,6 @@
         $rebotamos = true;
         $rebotamos2 = true;
         $rebotamos3 = true;
-
 
         while ($rebotes < 19) {
 
@@ -217,8 +212,6 @@
             $direccion2 = $ndireccion2;
             $direccion3 = $ndireccion3;
 
-
-
             #Mostrar el mapa actual
             echo '<div class="map" style="width: ' . $tamañoMapa . 'em;"><pre>';
             # Recuérdese que con la etiqueta <pre> los saltos de línea que haya se reflejan en la pantalla
@@ -261,6 +254,236 @@
 
 
 
+            switch ($direccion) {
+                case 1:
+                    if ($pelotaX - 1 >= 0 && $pelotaY - 1 >= 0) {
+
+                        if ($pelotaY - 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelotaX - 1] == "1") {
+                                $rebotamos = false;
+                            } else {
+                                $pelotaY -= 1;
+                                $pelotaX -= 1;
+                            }
+                        } else {
+                            $pelotaY -= 1;
+                            $pelotaX -= 1;
+                        }
+                    } else {
+                        $rebotamos = false;
+                    }
+                    break;
+                case 2:
+                    if ($pelotaX - 1 >= 0 && $pelotaY + 1 < $tamañoMapa) {
+                        if ($pelotaY + 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelotaX - 1] == "1") {
+                                $rebotamos = false;
+                            } else {
+                                $pelotaY += 1;
+                                $pelotaX -= 1;
+                            }
+                        } else {
+                            $pelotaY += 1;
+                            $pelotaX -= 1;
+                        }
+                    } else {
+                        $rebotamos = false;
+                    }
+                    break;
+                case 3:
+                    if ($pelotaX + 1 < $tamañoMapa && $pelotaY - 1 >= 0) {
+
+                        if ($pelotaY - 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelotaX + 1] == "1") {
+                                $rebotamos = false;
+                            } else {
+                                $pelotaY -= 1;
+                                $pelotaX += 1;
+                            }
+                        } else {
+                            $pelotaY -= 1;
+                            $pelotaX += 1;
+                        }
+                    } else {
+                        $rebotamos = false;
+                    }
+                    break;
+                case 4:
+                    if ($pelotaX + 1 < $tamañoMapa && $pelotaY + 1 < $tamañoMapa) {
+                        if ($pelotaY + 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelotaX + 1] == "1") {
+                                $rebotamos = false;
+                            } else {
+                                $pelotaY += 1;
+                                $pelotaX += 1;
+                            }
+                        } else {
+                            $pelotaY += 1;
+                            $pelotaX += 1;
+                        }
+                    } else {
+                        $rebotamos = false;
+                    }
+                    break;
+            }
+
+            switch ($direccion2) {
+                case 1:
+                    if ($pelota2X - 1 >= 0 && $pelota2Y - 1 >= 0) {
+
+                        if ($pelota2Y - 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota2X - 1] == "1") {
+                                $rebotamos2 = false;
+                            } else {
+                                $pelota2Y -= 1;
+                                $pelota2X -= 1;
+                            }
+                        } else {
+                            $pelota2Y -= 1;
+                            $pelota2X -= 1;
+                        }
+                    } else {
+                        $rebotamos2 = false;
+                    }
+                    break;
+                case 2:
+                    if ($pelota2X - 1 >= 0 && $pelota2Y + 1 < $tamañoMapa) {
+                        if ($pelota2Y + 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota2X - 1] == "1") {
+                                $rebotamos2 = false;
+                            } else {
+                                $pelota2Y += 1;
+                                $pelota2X -= 1;
+                            }
+                        } else {
+                            $pelota2Y += 1;
+                            $pelota2X -= 1;
+                        }
+                    } else {
+                        $rebotamos2 = false;
+                    }
+                    break;
+                case 3:
+                    if ($pelota2X + 1 < $tamañoMapa && $pelota2Y - 1 >= 0) {
+
+                        if ($pelota2Y - 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota2X + 1] == "1") {
+                                $rebotamos2 = false;
+                            } else {
+                                $pelota2Y -= 1;
+                                $pelota2X += 1;
+                            }
+                        } else {
+                            $pelota2Y -= 1;
+                            $pelota2X += 1;
+                        }
+                    } else {
+                        $rebotamos2 = false;
+                    }
+                    break;
+                case 4:
+                    if ($pelota2X + 1 < $tamañoMapa && $pelota2Y + 1 < $tamañoMapa) {
+                        if ($pelota2Y + 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota2X + 1] == "1") {
+                                $rebotamos2 = false;
+                            } else {
+                                $pelota2Y += 1;
+                                $pelota2X += 1;
+                            }
+                        } else {
+                            $pelota2Y += 1;
+                            $pelota2X += 1;
+                        }
+                    } else {
+                        $rebotamos2 = false;
+                    }
+                    break;
+            }
+
+            switch ($direccion3) {
+                case 1:
+                    if ($pelota3X - 1 >= 0 && $pelota3Y - 1 >= 0) {
+
+                        if ($pelota3Y - 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota3X - 1] == "1") {
+                                $rebotamos3 = false;
+                            } else {
+                                $pelota3Y -= 1;
+                                $pelota3X -= 1;
+                            }
+                        } else {
+                            $pelota3Y -= 1;
+                            $pelota3X -= 1;
+                        }
+                    } else {
+                        $rebotamos3 = false;
+                    }
+                    break;
+                case 2:
+                    if ($pelota3X - 1 >= 0 && $pelota3Y + 1 < $tamañoMapa) {
+                        if ($pelota3Y + 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota3X - 1] == "1") {
+                                $rebotamos = false;
+                            } else {
+                                $pelota3Y += 1;
+                                $pelota3X -= 1;
+                            }
+                        } else {
+                            $pelota3Y += 1;
+                            $pelota3X -= 1;
+                        }
+                    } else {
+                        $rebotamos3 = false;
+                    }
+                    break;
+                case 3:
+                    if ($pelota3X + 1 < $tamañoMapa && $pelota3Y - 1 >= 0) {
+
+                        if ($pelota3Y - 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota3X + 1] == "1") {
+                                $rebotamos3 = false;
+                            } else {
+                                $pelota3Y -= 1;
+                                $pelota3X += 1;
+                            }
+                        } else {
+                            $pelota3Y -= 1;
+                            $pelota3X += 1;
+                        }
+                    } else {
+                        $rebotamos3 = false;
+                    }
+                    break;
+                case 4:
+                    if ($pelota3X + 1 < $tamañoMapa && $pelota3Y + 1 < $tamañoMapa) {
+                        if ($pelota3Y + 1 == $tamañoMapa - 2) {
+
+                            if ($plataforma[$pelota3X + 1] == "1") {
+                                $rebotamos3 = false;
+                            } else {
+                                $pelota3Y += 1;
+                                $pelota3X += 1;
+                            }
+                        } else {
+                            $pelota3Y += 1;
+                            $pelota3X += 1;
+                        }
+                    } else {
+                        $rebotamos3 = false;
+                    }
+                    break;
+            }
             //Plataforma
 
             if ($desplazamientos > 1 && $booleanDesplazar) {
@@ -290,116 +513,6 @@
             }
 
             ####
-
-            switch ($direccion) {
-                case 1:
-                    if ($pelotaX - 1 >= 0 && $pelotaY - 1 >= 0) {
-
-                        $pelotaY -= 1;
-                        $pelotaX -= 1;
-                    } else {
-                        $rebotamos = false;
-                    }
-                    break;
-                case 2:
-                    if ($pelotaX - 1 >= 0 && $pelotaY + 1 < $tamañoMapa) {
-
-                        $pelotaX -= 1;
-                        $pelotaY += 1;
-                    } else {
-                        $rebotamos = false;
-                    }
-                    break;
-                case 3:
-                    if ($pelotaX + 1 < $tamañoMapa && $pelotaY - 1 >= 0) {
-
-
-                        $pelotaX += 1;
-                        $pelotaY -= 1;
-                    } else {
-                        $rebotamos = false;
-                    }
-                    break;
-                case 4:
-                    if ($pelotaX + 1 < $tamañoMapa && $pelotaY + 1 < $tamañoMapa) {
-
-                        $pelotaX += 1;
-                        $pelotaY += 1;
-                    } else {
-                        $rebotamos = false;
-                    }
-                    break;
-            }
-
-            switch ($direccion2) {
-                case 1:
-                    if ($pelota2X - 1 >= 0 && $pelota2Y - 1 >= 0) {
-                        $pelota2Y -= 1;
-                        $pelota2X -= 1;
-                    } else {
-                        $rebotamos2 = false;
-                    }
-                    break;
-                case 2:
-                    if ($pelota2X - 1 >= 0 && $pelota2Y + 1 < $tamañoMapa) {
-                        $pelota2X -= 1;
-                        $pelota2Y += 1;
-                    } else {
-                        $rebotamos2 = false;
-                    }
-                    break;
-                case 3:
-                    if ($pelota2X + 1 < $tamañoMapa && $pelota2Y - 1 >= 0) {
-                        $pelota2X += 1;
-                        $pelota2Y -= 1;
-                    } else {
-                        $rebotamos2 = false;
-                    }
-                    break;
-                case 4:
-                    if ($pelota2X + 1 < $tamañoMapa && $pelota2Y + 1 < $tamañoMapa) {
-                        $pelota2X += 1;
-                        $pelota2Y += 1;
-                    } else {
-                        $rebotamos2 = false;
-                    }
-                    break;
-            }
-
-            switch ($direccion3) {
-                case 1:
-                    if ($pelota3X - 1 >= 0 && $pelota3Y - 1 >= 0) {
-                        $pelota3Y -= 1;
-                        $pelota3X -= 1;
-                    } else {
-                        $rebotamos3 = false;
-                    }
-                    break;
-                case 2:
-                    if ($pelota3X - 1 >= 0 && $pelota3Y + 1 < $tamañoMapa) {
-                        $pelota3X -= 1;
-                        $pelota3Y += 1;
-                    } else {
-                        $rebotamos3 = false;
-                    }
-                    break;
-                case 3:
-                    if ($pelota3X + 1 < $tamañoMapa && $pelota3Y - 1 >= 0) {
-                        $pelota3X += 1;
-                        $pelota3Y -= 1;
-                    } else {
-                        $rebotamos3 = false;
-                    }
-                    break;
-                case 4:
-                    if ($pelota3X + 1 < $tamañoMapa && $pelota3Y + 1 < $tamañoMapa) {
-                        $pelota3X += 1;
-                        $pelota3Y += 1;
-                    } else {
-                        $rebotamos3 = false;
-                    }
-                    break;
-            }
 
             $rebotes++;
         }
