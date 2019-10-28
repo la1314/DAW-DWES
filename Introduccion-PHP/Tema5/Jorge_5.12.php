@@ -46,7 +46,7 @@
     <h1>
         <?php
 
-        $tamañoMapa = 10;
+        $tamañoMapa = 6;
         $rebotes = 0;
         $direccion;
         $direccion2;
