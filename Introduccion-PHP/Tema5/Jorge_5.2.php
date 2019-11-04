@@ -45,9 +45,6 @@
 
         while ($tablas < 11) {
             
-            echo("<td> Tabla del $tablas</td>");
-
-            $tablas++;
         }
 
         echo("</tr>");
