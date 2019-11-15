@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jorge 7.1</title>
+</head>
+
+<body>
+    <form action="Jorge_7.1.php" method="POST">
+
+        Introduzca su nombre:
+        <input type="text" name="nombre">
+        <br>
+        Contraseña:
+        <input type="password" name="password">
+        <br>
+        Coche:
+        <select name="coche">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+        <br>
+
+
+        Colores:
+
+        <p>
+            Red<input type="checkbox" name="color[]" id="color" value="red">
+            Green<input type="checkbox" name="color[]" id="color" value="green">
+            Blue<input type="checkbox" name="color[]" id="color" value="blue">
+        </p>
+
+
+
+        <br>
+        <textarea name="mensaje" rows="10" cols="30">¡Expresate!</textarea>
+        <br>
+        <input type="submit" value="enviar">
+
+    </form>
+</body>
+
+</html>
