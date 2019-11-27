@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Jorge 9.1</title>
+    <style>
+        th {
+            color: red;
+            background-color: yellow;
+        }
+
+        td {
+            background-color: aquamarine;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+
+        }
+    </style>
 </head>
 
 <body>
@@ -25,7 +44,7 @@
     if (!$conn) {
         die("exploto: " . mysqli_connect_error());
     }
-   
+
 
     # A continuación se usa un "SELECT", pero igualmente podría ser
     #  INSERT, DELETE o UPDATE. El código PHP sería idéntico.
@@ -36,19 +55,29 @@
     # TRUE. Salvo si hay fallo, en cuyo caso devuelve FALSE.
     $result = mysqli_query($conn, $consulta);
 
+    echo ("<table>");
+    echo ("<th>Nombre</th>");
+    echo ("<th>DNI</th>");
+
     # Es preciso iterar para extrar una a una las filas del resultado
     while ($fila = mysqli_fetch_array($result)) {
 
-        echo '<br>';
+        echo ("<tr>");
+
+        $nombre = $fila["nombre"];
+        $dni = $fila["DNI"];
+
+        echo ("<td>$nombre</td>");
+        echo ("<td>$dni</td>");
+
         # Esta es una manera alternativa de mostrar la fila, habida
         # cuenta de que mysqli_fetch_array devuelve un array
         # asociativo
-        echo $fila["DNI"] . ': ' . $fila["nombre"]; //o bien echo $fila[DNI].':'.$fila[nombre];
 
-        echo '<br>';
-        echo '<br>';
+        echo ("</tr>");
     }
 
+    echo ("</table>");
     # En el caso de haber usado un SELECT:
     #echo "El resultado es de " . mysqli_num_rows($result) . " filas<br>";
 
@@ -56,6 +85,9 @@
     # el número de filas de la última operación se obtiene así:
     #echo "El resultado es de " . mysqli_affected_rows($conn) . " filas<br>";
 
+    # Libera la memoria asociada al resultado.
+    # Siempre se debe liberar el resultado con mysqli_free_result(), 
+    #   cuando el objeto del resultado ya no es necesario.
     mysqli_free_result($result);
 
 
