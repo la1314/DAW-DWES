@@ -6,86 +6,152 @@ import java.sql.*;
 
 public class Jorge_10_26_principal extends HttpServlet {
 
-    public void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
-        HttpSession misesion;
-        misesion = peticion.getSession(true);
-        misesion.setMaxInactiveInterval(10);
-        //misesion.setAttribute("listado", productos);
-        
-        List<Map<String , String>> studentList = new ArrayList<>();
-        Map<String , String> productos = new HashMap();
+    ArrayList<String> lista = new ArrayList<String>();
 
-        /* if (misesion.isNew() == true) {
-            a = new Integer(1);
-            c = new contador(1);
-            misesion.setAttribute("Contador1", a);
-            misesion.setAttribute("Contador2", c);
-        } else {
-            a = (Integer) misesion.getAttribute("Contador1");
-            c = (contador) misesion.getAttribute("Contador2");
-            a = new Integer(a.intValue() + 1);
-            c.incrementar();
-            misesion.setAttribute("Contador1", a);
-            misesion.setAttribute("Contador2", c);
-        } */
+    public void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
 
         {
+            HttpSession misesion;
+            misesion = peticion.getSession(true);
+
             respuesta.setContentType("text/html");
             PrintWriter salida = respuesta.getWriter();
             String titulo = "Jorge 10.26";
-            salida.println ("<TITLE>"+titulo+"</TITLE>\n");
-            salida.println ("<BODY BGCOLOR=\"#FDF5E6\">\n");
-            
-           
-            try
-            {
-                salida.println ("<H1 ALIGN=CENTER>"+titulo+"</H1>\n\n");
+            salida.println("<TITLE>" + titulo + "</TITLE>\n");
+            salida.println("<BODY BGCOLOR=\"#FDF5E6\">\n");
+
+            try {
+                salida.println("<H1 ALIGN=CENTER>" + titulo + "</H1>\n\n");
                 DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
                 String SourceURL = "jdbc:mysql://192.168.4.65:3306/bdprueba";
                 String user = "miusuario";
                 String password = "mipassword";
                 Connection miconexion;
                 miconexion = DriverManager.getConnection(SourceURL, user, password);
-               
+
                 Statement misentencia;
                 ResultSet misresultados;
-                misentencia=miconexion.createStatement();
-                misresultados=misentencia.executeQuery ("SELECT nombre, precio FROM productos");
-               
-                salida.println(
-                    "<TABLE BORDER=1 ALIGN=CENTER>\n"+
-                    "<TR BGCOLOR=\"#FFAD00\">\n"+
-                    "<TH>Producto<TH>Precio<TH>");
-               
-                while (misresultados.next())
-                {
-                    salida.println(
-                        "<TR><TD>"+
-                        misresultados.getString("nombre")+"\n<TD>"+
-                        misresultados.getString("precio")+" &euro;"+"\n<TD>"+
-                        "Añadir a Carrito");
+                misentencia = miconexion.createStatement();
+                misresultados = misentencia.executeQuery("SELECT * FROM productos");
+
+                salida.println("<TABLE BORDER=1 ALIGN=CENTER>\n" + "<TR BGCOLOR=\"#FFAD00\">\n"
+                        + "<TH>Producto<TH>Precio<TH>");
+
+                while (misresultados.next()) {
+
+                    String nombre = misresultados.getString("nombre");
+                    String precio = misresultados.getString("precio");
+                    int id = misresultados.getInt("id");
+
+                    salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_principal' METHOD='POST'>");
+                    salida.println("<INPUT TYPE='hidden' value='" + id + "' NAME='id'>");
+
+                    salida.println("<TR><TD>" +
+
+                            nombre + "\n<TD>" + precio + " &euro;" + "\n<TD>"
+                            + "<button type=''>Añadir a Carrito</button>");
+
+                    salida.println("</FORM>");
+
                 }
-                salida.println("</TABLE></BODY></HTML>");
+                salida.println("</TABLE>");
+
+                salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_principal' METHOD='POST'>");
+
+                // if (session.getAttribute("Username") == null ||
+                // session.getAttribute("Username").equals(""))
+
+                salida.println("<button type=''>Enviar pedidos</button>");
+                salida.println("</FORM>");
+
+                salida.println("</BODY></HTML>");
                 miconexion.close();
-            }
-            catch (SQLException sqle)
-            {   
-                
+            } catch (SQLException sqle) {
+
                 salida.println(sqle);
                 salida.println("</BODY></HTML>");
             }
         }
-
-        /* respuesta.setContentType("text/html");
-        PrintWriter salida = respuesta.getWriter();
-        String titulo = "Tienda";
-        salida.println("<TITLE>" + titulo + "</TITLE>\n<BODY>");
-        salida.println("<H1 ALIGN=CENTER>" + titulo + "</H1>\n\n");
-        salida.println("<BR>El contador 1 vale: " + a.intValue());
-        salida.println("<BR>El contador 2 vale: " + c.valor());
-        salida.println("<BR>Id de sesión: " + misesion.getId());
-        salida.println("<BR>Inicio de sesión: " + new Date(misesion.getCreationTime()));
-        salida.println("<BR>Último acceso a la sesión: " + new Date(misesion.getLastAccessedTime()));
-        salida.println("</BODY></HTML>"); */
     }
+
+    public void doPost(HttpServletRequest peticion, HttpServletResponse respuesta)
+            throws ServletException, IOException {
+
+        HttpSession misesion;
+        misesion = peticion.getSession(true);
+        misesion.setMaxInactiveInterval(10);
+
+        String productos = peticion.getParameter("id");
+
+        lista.add(productos);
+
+        misesion.setAttribute("lista", lista);
+
+        {
+            respuesta.setContentType("text/html");
+            PrintWriter salida = respuesta.getWriter();
+            String titulo = "Jorge 10.26";
+            salida.println("<TITLE>" + titulo + "</TITLE>\n");
+            salida.println("<BODY BGCOLOR=\"#FDF5E6\">\n");
+
+            try {
+                salida.println("<H1 ALIGN=CENTER>" + titulo + "</H1>\n\n");
+                DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
+                String SourceURL = "jdbc:mysql://192.168.4.65:3306/bdprueba";
+                String user = "miusuario";
+                String password = "mipassword";
+                Connection miconexion;
+                miconexion = DriverManager.getConnection(SourceURL, user, password);
+
+                Statement misentencia;
+                ResultSet misresultados;
+                misentencia = miconexion.createStatement();
+                misresultados = misentencia.executeQuery("SELECT * FROM productos");
+
+                salida.println("<TABLE BORDER=1 ALIGN=CENTER>\n" + "<TR BGCOLOR=\"#FFAD00\">\n"
+                        + "<TH>Producto<TH>Precio<TH>");
+
+                while (misresultados.next()) {
+
+                    String nombre = misresultados.getString("nombre");
+                    String precio = misresultados.getString("precio");
+                    int id = misresultados.getInt("id");
+
+                    salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_principal' METHOD='POST'>");
+                    salida.println("<INPUT TYPE='hidden' value='" + id + "' NAME='id'>");
+
+                    salida.println("<TR><TD>" +
+
+                            nombre + "\n<TD>" + precio + " &euro;" + "\n<TD>"
+                            + "<button type=''>Añadir a Carrito</button>");
+
+                    salida.println("</FORM>");
+
+                }
+                salida.println("</TABLE>");
+
+                ArrayList<String> lista = (ArrayList<String>) misesion.getAttribute("lista");
+
+                salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_envio' METHOD='POST'>");
+
+                salida.println("<INPUT TYPE='hidden' value='" + lista + "' NAME='ids'>");
+                
+
+                salida.println("<button type=''>Enviar pedidos</button>");
+
+                salida.println("</FORM>");
+
+                salida.println("</BODY></HTML>");
+                miconexion.close();
+            } catch (SQLException sqle) {
+
+                salida.println(sqle);
+                salida.println("</BODY></HTML>");
+            }
+
+
+        }
+
+    }
+
 }
