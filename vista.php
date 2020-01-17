@@ -9,21 +9,16 @@
 </head>
 
 <body>
-    <h1>List of Posts</h1>
-    <table>
-        <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-        </tr>
-        <?php
-        echo $post;
-        foreach ($mensajes as $post) : ?>
-            <tr>
-                <td><?php echo $post["nombre"] ?></td>
-                <td><?php echo $post["precio"] ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+
+    <?php
+
+        if (isset($_POST["carrito"])) {
+            MostrarLista();
+        } else {
+            MostrarProductos($mensajes);
+        }  
+    ?>
+    
 </body>
 
 </html>
