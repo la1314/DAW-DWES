@@ -69,6 +69,31 @@ INSERT INTO `empleados` VALUES (9,'Rigoberto',10,10000),(55,'Brian Blanco',5,1),
 UNLOCK TABLES;
 
 --
+-- Table structure for table `envios`
+--
+
+DROP TABLE IF EXISTS `envios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `envios` (
+  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+  `lista` varchar(2000) NOT NULL,
+  `total` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `envios`
+--
+
+LOCK TABLES `envios` WRITE;
+/*!40000 ALTER TABLE `envios` DISABLE KEYS */;
+INSERT INTO `envios` VALUES (1,'|Galletas OwO||Galletas OwO||Galletas OwO|','9.0'),(2,'|Zumo de OwO||Zumo de UwU||Ositos de Gominola||Patatas Fritas|','23.5'),(3,'|Galletas OwO||Galletas OwO||Galletas OwO|','14.0'),(4,'|Patatas Fritas||Galletas OwO||Patatas Fritas||Patatas Fritas||Patatas Fritas||Galletas OwO||Ositos de Gominola|','23.5'),(5,'|Patatas Fritas||Galletas OwO||Patatas Fritas||Galletas OwO|','17.0'),(6,'|Patatas Fritas||Galletas OwO||Ositos de Gominola||Galletas OwO||Ositos de Gominola|','16.0');
+/*!40000 ALTER TABLE `envios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `productos`
 --
 
@@ -141,6 +166,31 @@ LOCK TABLES `usuarios` WRITE;
 INSERT INTO `usuarios` VALUES (1,'Pera Asesina'),(2,'Hipopotamo'),(3,'patata'),(4,'pera');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `vendedor`
+--
+
+DROP TABLE IF EXISTS `vendedor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vendedor` (
+  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vendedor`
+--
+
+LOCK TABLES `vendedor` WRITE;
+/*!40000 ALTER TABLE `vendedor` DISABLE KEYS */;
+INSERT INTO `vendedor` VALUES (1,'admin','admin');
+/*!40000 ALTER TABLE `vendedor` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -151,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-14 15:03:15
+-- Dump completed on 2020-01-18 22:07:45
