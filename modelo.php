@@ -6,7 +6,7 @@ if (!isset($_SESSION["lista"])) {
     $_SESSION["lista"] = "";
 }
 
-if (isset($_POST["id"]) & !empty($_POST["id"])) {
+if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $_SESSION["lista"] .= $_POST["id"] . ", ";
 }
 
@@ -38,44 +38,8 @@ function ListarProductos()
     return $mensajes;
 }
 
-function MostrarProductos($mensajes)
+function ListarCarrito($consulta)
 {
-
-    echo "<h1>Lista de productos</h1>";
-    echo "<table>";
-    echo "<tr>";
-    echo "<th>Producto</th>";
-    echo "<th>Precio</th>";
-    echo "</tr>";
-
-    foreach ($mensajes as $post) :
-
-        $nombre = $post["nombre"];
-        $precio = $post["precio"];
-        $id = $post["id"];
-        echo "<tr>";
-        echo "<td>$nombre</td>";
-        echo "<td>$precio</td>";
-        echo "<td>";
-        echo '<form action="controlador.php" method="POST">';
-        echo "<input type='hidden' name='id' value='$id'>";
-        echo '<button type="submit">Añadir a carrito</button>';
-        echo "</form>";
-        echo "</td>";
-        echo "</tr>";
-    endforeach;
-    echo "</table>";
-    echo "<form action='controlador.php' method='POST'>";
-    echo "<input type='hidden' name='carrito' value='1'>";
-    echo "<button type='submit'>Ver Carrito</button>";
-    echo "</form>";
-}
-
-function MostrarLista()
-{
-
-    $claves = preg_split("/[\s,]+/", $_SESSION["lista"]);
-
     // Conexión
     $servidor = "192.168.4.65";
     $username = "miusuario";
@@ -85,13 +49,27 @@ function MostrarLista()
     # Crear conexión
     $link = mysqli_connect($servidor, $username, $password, $basedatos);
 
-    echo "<h1>Lista del carrito</h1>";
-    echo "<table>";
-    echo "<tr>";
-    echo "<th>Producto</th>";
-    echo "<th>Precio</th>";
-    echo "</tr>";
+    $result = mysqli_query($link, $consulta);
+
+    // Cierre de la conexión
+    mysqli_close($link);
+    return $result;
+}
+
+function GuardarEnvio()
+{
+    // Conexión
+    $servidor = "192.168.4.65";
+    $username = "miusuario";
+    $password = "mipassword";
+    $basedatos = "bdprueba";
+
+    # Crear conexión
+    $link = mysqli_connect($servidor, $username, $password, $basedatos);
+
+    $claves = preg_split("/[\s,]+/", $_SESSION["lista"]);
     $total = 0;
+    $listaC = "";
 
     for ($i = 0; $i < count($claves); $i++) {
         $id = $claves[$i];
@@ -104,19 +82,13 @@ function MostrarLista()
             $nombre = $fila["nombre"];
             $precio = $fila["precio"];
             $total += (float) $precio;
-
-            echo "<tr>";
-            echo "<td>$nombre</td>";
-            echo "<td>$precio</td>";
-            echo "</tr>";
+            $listaC .= $nombre . "| ";
         }
     }
-    echo "<tr>";
-    echo "<td>Total:</td>";
-    echo "<td>$total</td>";
-    echo "</tr>";
 
-    echo "</table>";
+    $consulta = "INSERT INTO envios (lista, total) values ('$listaC', '$total');";
+    mysqli_query($link, $consulta);
+    $_SESSION["lista"] = "";
     // Cierre de la conexión
     mysqli_close($link);
 }
