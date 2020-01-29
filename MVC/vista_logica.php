@@ -1,5 +1,15 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION["lista"])) {
+    $_SESSION["lista"] = "";
+}
+
+if (isset($_POST["id"]) && !empty($_POST["id"])) {
+    $_SESSION["lista"] .= $_POST["id"] . ", ";
+}
+
 function MostrarProductos($mensajes)
 {
 
