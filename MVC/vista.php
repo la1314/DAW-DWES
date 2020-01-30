@@ -12,9 +12,11 @@
 
     <?php
 
-        if (isset($_POST["carrito"])) {
+        if (isset($_POST["carrito"]) && !empty($_SESSION["lista"]) ) {
             MostrarLista();
-        } else {
+        } elseif (isset($_POST["envio"])) {
+            MostrarAgradecimiento();
+        }else {
             MostrarProductos($mensajes);
         }  
     ?>

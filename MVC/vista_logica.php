@@ -6,36 +6,8 @@ if (!isset($_SESSION["lista"])) {
     $_SESSION["lista"] = "";
 }
 
-if (isset($_POST["id"]) & !empty($_POST["id"])) {
+if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $_SESSION["lista"] .= $_POST["id"] . ", ";
-}
-
-function ListarProductos()
-{
-
-    // Conexión
-    $servidor = "192.168.4.65";
-    $username = "miusuario";
-    $password = "mipassword";
-    $basedatos = "bdprueba";
-
-    # Crear conexión
-    $link = mysqli_connect($servidor, $username, $password, $basedatos);
-    $consulta = "SELECT * FROM productos";
-
-    // Consulta
-    $result = mysqli_query($link, $consulta);
-    // Rellenar el array
-    $mensajes = array();
-
-    while ($fila = mysqli_fetch_array($result)) {
-
-        $mensajes[] = $fila;
-    }
-
-    // Cierre de la conexión
-    mysqli_close($link);
-    return $mensajes;
 }
 
 function MostrarProductos($mensajes)
@@ -73,18 +45,7 @@ function MostrarProductos($mensajes)
 
 function MostrarLista()
 {
-
     $claves = preg_split("/[\s,]+/", $_SESSION["lista"]);
-
-    // Conexión
-    $servidor = "192.168.4.65";
-    $username = "miusuario";
-    $password = "mipassword";
-    $basedatos = "bdprueba";
-
-    # Crear conexión
-    $link = mysqli_connect($servidor, $username, $password, $basedatos);
-
     echo "<h1>Lista del carrito</h1>";
     echo "<table>";
     echo "<tr>";
@@ -97,7 +58,7 @@ function MostrarLista()
         $id = $claves[$i];
         $consulta = "SELECT nombre, precio FROM productos WHERE id = $id";
         // Consulta
-        $result = mysqli_query($link, $consulta);
+        $result = ListarCarrito($consulta);
         // Rellenar el array
         while ($fila = mysqli_fetch_array($result)) {
 
@@ -115,8 +76,21 @@ function MostrarLista()
     echo "<td>Total:</td>";
     echo "<td>$total</td>";
     echo "</tr>";
-
     echo "</table>";
-    // Cierre de la conexión
-    mysqli_close($link);
+    echo "<form action='controlador.php' method='POST'>";
+    echo "<button type='submit'>Volver a la tienda</button>";
+    echo "</form>";
+    echo "<form action='controlador.php' method='POST'>";
+    echo "<input type='hidden' name='envio'>";
+    echo "<button type='submit'>Completar Compra</button>";
+    echo "</form>";
+}
+
+function MostrarAgradecimiento()
+{
+    GuardarEnvio();
+    echo "<h1>Gracias por tu compra</h1>";
+    echo "<form action='controlador.php' method='POST'>";
+    echo "<button type='submit'>Volver a la tienda</button>";
+    echo "</form>";
 }
