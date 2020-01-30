@@ -22,7 +22,7 @@ public class Jorge_10_26_vendedor extends HttpServlet {
         try {
 
             DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
-            String SourceURL = "jdbc:mysql://192.168.4.8:3306/bdprueba";
+            String SourceURL = "jdbc:mysql://192.168.4.65:3306/bdprueba";
             String user = "miusuario";
             String password = "mipassword";
             Connection miconexion;

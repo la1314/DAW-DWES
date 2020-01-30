@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.*;
 import java.sql.*;
 
-public class Jorge_10_26_principal extends HttpServlet {
+public class Jorge_10_27_principal extends HttpServlet {
 
     ArrayList<String> lista = new ArrayList<String>();
 
@@ -14,23 +14,38 @@ public class Jorge_10_26_principal extends HttpServlet {
             HttpSession misesion;
             misesion = peticion.getSession(true);
 
+            Cookie migalleta;
+            Cookie[] misgalletas;
+            misgalletas = peticion.getCookies();
+
+            if (misgalletas == null) {
+                migalleta = new Cookie("id", misesion.getId());
+                migalleta.setMaxAge(999999999); // 1 minuto
+            } else {
+                migalleta = misgalletas[0];
+            }
+
             respuesta.setContentType("text/html");
             PrintWriter salida = respuesta.getWriter();
-            String titulo = "Jorge 10.26";
+            String titulo = "Jorge 10.27";
             salida.println("<TITLE>" + titulo + "</TITLE>\n");
             salida.println("<BODY BGCOLOR=\"#FDF5E6\">\n");
 
-            salida.println("<FORM align='right' ACTION='/Proyecto1/Jorge_10.26_vendedor' METHOD='POST'>");
+            salida.println("<FORM align='right' ACTION='/Proyecto1/Jorge_10.27_vendedor' METHOD='POST'>");
             salida.println("<INPUT TYPE='text' NAME='user'>");
             salida.println("<INPUT TYPE='password' NAME='password'>");
             salida.println("<button type=''>Login</button>");
             salida.println("</FORM>");
-    
+
+            salida.println("<FORM align='left' ACTION='/Proyecto1/Jorge_10.27_compras' METHOD='POST'>");
+            salida.println("<INPUT TYPE='hidden' value='" + migalleta.getValue() + "' NAME='cookie'>");
+            salida.println("<button type=''>Ver mis compras</button>");
+            salida.println("</FORM>");
 
             try {
                 salida.println("<H1 ALIGN=CENTER>" + titulo + "</H1>\n\n");
                 DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
-                String SourceURL = "jdbc:mysql://192.168.4.8:3306/bdprueba";
+                String SourceURL = "jdbc:mysql://192.168.4.65:3306/bdprueba";
                 String user = "miusuario";
                 String password = "mipassword";
                 Connection miconexion;
@@ -50,7 +65,7 @@ public class Jorge_10_26_principal extends HttpServlet {
                     String precio = misresultados.getString("precio");
                     int id = misresultados.getInt("id");
 
-                    salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_principal' METHOD='POST'>");
+                    salida.println("<FORM ACTION='/Proyecto1/Jorge_10.27_principal' METHOD='POST'>");
                     salida.println("<INPUT TYPE='hidden' value='" + id + "' NAME='id'>");
 
                     salida.println("<TR><TD>" +
@@ -64,7 +79,7 @@ public class Jorge_10_26_principal extends HttpServlet {
                 salida.println("</TABLE>");
 
                 salida.println("<CENTER>");
-                salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_principal' METHOD='POST'>");
+                salida.println("<FORM ACTION='/Proyecto1/Jorge_10.27_principal' METHOD='POST'>");
                 salida.println("<button type=''>Enviar pedidos</button>");
                 salida.println("</FORM>");
                 salida.println("</CENTER>");
@@ -84,16 +99,28 @@ public class Jorge_10_26_principal extends HttpServlet {
         HttpSession misesion;
         misesion = peticion.getSession(true);
         misesion.setMaxInactiveInterval(10);
+
+        Cookie migalleta;
+        Cookie[] misgalletas;
+        misgalletas = peticion.getCookies();
+
+        if (misgalletas == null) {
+            migalleta = new Cookie("id", misesion.getId());
+            migalleta.setMaxAge(999999999); // 1 minuto
+        } else {
+            migalleta = misgalletas[0];
+        }
+
         respuesta.setContentType("text/html");
         PrintWriter salida = respuesta.getWriter();
-        String titulo = "Jorge 10.26";
+        String titulo = "Jorge 10.27";
 
         if (peticion.getParameter("envio") != null) {
 
             try {
                 salida.println("<H1 ALIGN=CENTER>" + titulo + "</H1>\n\n");
                 DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
-                String SourceURL = "jdbc:mysql://192.168.4.8:3306/bdprueba";
+                String SourceURL = "jdbc:mysql://192.168.4.65:3306/bdprueba";
                 String user = "miusuario";
                 String password = "mipassword";
                 Connection miconexion;
@@ -102,10 +129,10 @@ public class Jorge_10_26_principal extends HttpServlet {
                 Statement misentencia;
                 ResultSet misresultados;
                 misentencia = miconexion.createStatement();
-               String aux = peticion.getParameter("envio");
-               String listaString = aux.replace("[", "").replace("]", "");
-               String[] lista_id = listaString.split(",");
-                
+                String aux = peticion.getParameter("envio");
+                String listaString = aux.replace("[", "").replace("]", "");
+                String[] lista_id = listaString.split(",");
+
                 float total = 0;
                 String nombre = "";
                 int costeEnvio = 2 + lista_id.length;
@@ -117,14 +144,14 @@ public class Jorge_10_26_principal extends HttpServlet {
 
                     while (misresultados.next()) {
 
-                        nombre += "|"+misresultados.getString("nombre")+"|";
-                        
+                        nombre += "|" + misresultados.getString("nombre") + "|";
+
                         total += Float.parseFloat(misresultados.getString("precio"));
 
                     }
                 }
                 total += costeEnvio;
-                String consulta = "INSERT INTO envios (lista,total) values ('"+nombre+"','"+total+"')";
+                String consulta = "INSERT INTO envios (lista,total, idcookie) values ('" + nombre + "','" + total + "','" + migalleta.getValue() + "')";
                 misentencia.executeUpdate(consulta);
 
                 miconexion.close();
@@ -141,7 +168,7 @@ public class Jorge_10_26_principal extends HttpServlet {
             salida.println("<BODY BGCOLOR=\"#FDF5E6\">\n");
             salida.println("<H1 ALIGN=CENTER>Gracias por tu compra</H1>\n\n");
             salida.println("<CENTER>");
-            salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_principal' METHOD='GET'>");
+            salida.println("<FORM ACTION='/Proyecto1/Jorge_10.27_principal' METHOD='GET'>");
             salida.println("<INPUT TYPE='hidden' value='' NAME='regresar'>");
             salida.println("<button type=''>Volver a la Tienda</button>");
             salida.println("</FORM>");
@@ -157,15 +184,20 @@ public class Jorge_10_26_principal extends HttpServlet {
             {
                 salida.println("<TITLE>" + titulo + "</TITLE>\n");
                 salida.println("<BODY BGCOLOR=\"#FDF5E6\">\n");
-                salida.println("<FORM align='right' ACTION='/Proyecto1/Jorge_10.26_vendedor' METHOD='POST'>");
+                salida.println("<FORM align='right' ACTION='/Proyecto1/Jorge_10.27_vendedor' METHOD='POST'>");
                 salida.println("<INPUT TYPE='text' NAME='user'>");
                 salida.println("<INPUT TYPE='password' NAME='password'>");
                 salida.println("<button type=''>Login</button>");
                 salida.println("</FORM>");
+                salida.println("<FORM align='left' ACTION='/Proyecto1/Jorge_10.27_compras' METHOD='POST'>");
+                salida.println("<INPUT TYPE='hidden' value='" + migalleta.getValue() + "' NAME='cookie'>");
+                salida.println("<button type=''>Ver mis compras</button>");
+                salida.println("</FORM>");
+
                 try {
                     salida.println("<H1 ALIGN=CENTER>" + titulo + "</H1>\n\n");
                     DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
-                    String SourceURL = "jdbc:mysql://192.168.4.8:3306/bdprueba";
+                    String SourceURL = "jdbc:mysql://192.168.4.65:3306/bdprueba";
                     String user = "miusuario";
                     String password = "mipassword";
                     Connection miconexion;
@@ -185,7 +217,7 @@ public class Jorge_10_26_principal extends HttpServlet {
                         String precio = misresultados.getString("precio");
                         int id = misresultados.getInt("id");
 
-                        salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_principal' METHOD='POST'>");
+                        salida.println("<FORM ACTION='/Proyecto1/Jorge_10.27_principal' METHOD='POST'>");
                         salida.println("<INPUT TYPE='hidden' value='" + id + "' NAME='id'>");
 
                         salida.println("<TR><TD>" +
@@ -201,7 +233,7 @@ public class Jorge_10_26_principal extends HttpServlet {
                     ArrayList<String> lista = (ArrayList<String>) misesion.getAttribute("lista");
 
                     salida.println("<CENTER>");
-                    salida.println("<FORM ACTION='/Proyecto1/Jorge_10.26_envio' METHOD='POST'>");
+                    salida.println("<FORM ACTION='/Proyecto1/Jorge_10.27_envio' METHOD='POST'>");
                     salida.println("<INPUT TYPE='hidden' value='" + lista + "' NAME='ids'>");
                     salida.println("<button type=''>Enviar pedidos</button>");
                     salida.println("</FORM>");
