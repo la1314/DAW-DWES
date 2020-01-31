@@ -1,0 +1,250 @@
+<web-app>
+
+    <servlet>
+         <servlet-name>MiPrimerServlet</servlet-name>
+         <servlet-class>MiServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+         <servlet-name>MiPrimerServlet</servlet-name>
+         <url-pattern>/servlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+         <servlet-name>Ejercicio4_1</servlet-name>
+         <servlet-class>Jorge_4_1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+         <servlet-name>Ejercicio4_1</servlet-name>
+         <url-pattern>/Jorge_4.1</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+         <servlet-name>Ejercicio4_2</servlet-name>
+         <servlet-class>Jorge_4_2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+         <servlet-name>Ejercicio4_2</servlet-name>
+         <url-pattern>/Jorge_4.2</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+         <servlet-name>Ejercicio4_3</servlet-name>
+         <servlet-class>Jorge_4_3</servlet-class>
+    </servlet>
+    <servlet-mapping>
+         <servlet-name>Ejercicio4_3</servlet-name>
+         <url-pattern>/Jorge_4.3</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_7</servlet-name>
+         <servlet-class>Jorge_10_7</servlet-class>
+      </servlet>
+    <servlet-mapping>
+         <servlet-name>Ejercicio10_7</servlet-name>
+         <url-pattern>/Jorge_10.7</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_8</servlet-name>
+         <servlet-class>Jorge_10_8</servlet-class>
+      </servlet>
+    <servlet-mapping>
+         <servlet-name>Ejercicio10_8</servlet-name>
+         <url-pattern>/Jorge_10.8</url-pattern>
+    </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio3_6</servlet-name>
+         <servlet-class>Jorge_3_6</servlet-class>
+      </servlet>
+
+    <servlet-mapping>
+         <servlet-name>Ejercicio3_6</servlet-name>
+         <url-pattern>/Jorge_3.6</url-pattern>
+    </servlet-mapping>
+
+     <servlet>
+         <servlet-name>Ejercicio3_7</servlet-name>
+         <servlet-class>Jorge_3_7</servlet-class>
+     </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio3_7</servlet-name>
+         <url-pattern>/Jorge_3.7</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio3_8</servlet-name>
+         <servlet-class>Jorge_3_8</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio3_8</servlet-name>
+         <url-pattern>/Jorge_3.8</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio3_9</servlet-name>
+         <servlet-class>Jorge_3_9</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio3_9</servlet-name>
+         <url-pattern>/Jorge_3.9</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio3_10</servlet-name>
+         <servlet-class>Jorge_3_10</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio3_10</servlet-name>
+         <url-pattern>/Jorge_3.10</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio3_11</servlet-name>
+         <servlet-class>Jorge_3_11</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio3_11</servlet-name>
+         <url-pattern>/Jorge_3.11</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_17</servlet-name>
+         <servlet-class>Jorge_10_17</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_17</servlet-name>
+         <url-pattern>/Jorge_10.17</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_18</servlet-name>
+         <servlet-class>Jorge_10_18</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_18</servlet-name>
+         <url-pattern>/Jorge_10.18</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_19</servlet-name>
+         <servlet-class>Jorge_10_19</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_19</servlet-name>
+         <url-pattern>/Jorge_10.19</url-pattern>
+     </servlet-mapping>
+
+
+    <servlet>
+         <servlet-name>Ejercicio10_20</servlet-name>
+         <servlet-class>Jorge_10_20</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_20</servlet-name>
+         <url-pattern>/Jorge_10.20</url-pattern>
+     </servlet-mapping>
+
+     <servlet>
+         <servlet-name>Ejercicio10_21</servlet-name>
+         <servlet-class>Jorge_10_21</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_21</servlet-name>
+         <url-pattern>/Jorge_10.21</url-pattern>
+     </servlet-mapping>
+     
+
+     <servlet>
+         <servlet-name>Ejercicio10_22</servlet-name>
+         <servlet-class>Jorge_10_22</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_22</servlet-name>
+         <url-pattern>/Jorge_10.22</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_26_principal</servlet-name>
+         <servlet-class>Jorge_10_26_principal</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_26_principal</servlet-name>
+         <url-pattern>/Jorge_10.26_principal</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_26_envio</servlet-name>
+         <servlet-class>Jorge_10_26_envio</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_26_envio</servlet-name>
+         <url-pattern>/Jorge_10.26_envio</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_26_vendedor</servlet-name>
+         <servlet-class>Jorge_10_26_vendedor</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_26_vendedor</servlet-name>
+         <url-pattern>/Jorge_10.26_vendedor</url-pattern>
+     </servlet-mapping>
+    
+
+    <servlet>
+         <servlet-name>Ejercicio10_27_principal</servlet-name>
+         <servlet-class>Jorge_10_27_principal</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_27_principal</servlet-name>
+         <url-pattern>/Jorge_10.27_principal</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_27_envio</servlet-name>
+         <servlet-class>Jorge_10_27_envio</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_27_envio</servlet-name>
+         <url-pattern>/Jorge_10.27_envio</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_27_vendedor</servlet-name>
+         <servlet-class>Jorge_10_27_vendedor</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_27_vendedor</servlet-name>
+         <url-pattern>/Jorge_10.27_vendedor</url-pattern>
+     </servlet-mapping>
+
+
+     <servlet>
+         <servlet-name>Ejercicio10_27_compras</servlet-name>
+         <servlet-class>Jorge_10_27_compras</servlet-class>
+      </servlet>
+     <servlet-mapping>
+         <servlet-name>Ejercicio10_27_compras</servlet-name>
+         <url-pattern>/Jorge_10.27_compras</url-pattern>
+     </servlet-mapping>
+</web-app>
