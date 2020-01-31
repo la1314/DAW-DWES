@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.28, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: bdprueba
 -- ------------------------------------------------------
--- Server version	5.7.28-0ubuntu0.18.04.4
+-- Server version	5.7.29-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -79,8 +79,9 @@ CREATE TABLE `envios` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `lista` varchar(2000) NOT NULL,
   `total` varchar(20) NOT NULL,
+  `idcookie` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +90,7 @@ CREATE TABLE `envios` (
 
 LOCK TABLES `envios` WRITE;
 /*!40000 ALTER TABLE `envios` DISABLE KEYS */;
-INSERT INTO `envios` VALUES (1,'|Galletas OwO||Galletas OwO||Galletas OwO|','9.0'),(2,'|Zumo de OwO||Zumo de UwU||Ositos de Gominola||Patatas Fritas|','23.5'),(3,'|Galletas OwO||Galletas OwO||Galletas OwO|','14.0'),(4,'|Patatas Fritas||Galletas OwO||Patatas Fritas||Patatas Fritas||Patatas Fritas||Galletas OwO||Ositos de Gominola|','23.5'),(5,'|Patatas Fritas||Galletas OwO||Patatas Fritas||Galletas OwO|','17.0'),(6,'|Patatas Fritas||Galletas OwO||Ositos de Gominola||Galletas OwO||Ositos de Gominola|','16.0');
+INSERT INTO `envios` VALUES (45,'|Patatas Fritas||Patatas Fritas|','8.0','50FD0B251344EBB76C3360BDEEA2EF83'),(46,'|Galletas OwO|','6.0','50FD0B251344EBB76C3360BDEEA2EF83'),(47,'|Patatas Fritas||Galletas OwO|','9.0','50FD0B251344EBB76C3360BDEEA2EF83'),(48,'|Patatas Fritas|','5.0','50FD0B251344EBB76C3360BDEEA2EF83'),(49,'|Zumo de OwO|','13.0','50FD0B251344EBB76C3360BDEEA2EF83'),(50,'|Patatas Fritas||Patatas Fritas|','8.0','DF5C333E0C021A6C6109D812962AC117'),(51,'|Ositos de Gominola||Ositos de Gominola||Ositos de Gominola||Ositos de Gominola||Ositos de Gominola|','9.5','DF5C333E0C021A6C6109D812962AC117'),(52,'|Pipas||Patatas Fritas|','7.5','DF5C333E0C021A6C6109D812962AC117');
 /*!40000 ALTER TABLE `envios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-18 22:07:45
+-- Dump completed on 2020-01-31 16:41:09
