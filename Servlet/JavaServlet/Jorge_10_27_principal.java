@@ -14,16 +14,29 @@ public class Jorge_10_27_principal extends HttpServlet {
             HttpSession misesion;
             misesion = peticion.getSession(true);
 
-            Cookie migalleta;
+            Cookie migalleta = null;
             Cookie[] misgalletas;
             misgalletas = peticion.getCookies();
 
             if (misgalletas == null) {
-                migalleta = new Cookie("id", misesion.getId());
-                migalleta.setMaxAge(999999999); // 1 minuto
-            } else {
-                migalleta = misgalletas[0];
+
+                migalleta = new Cookie("idCookie", misesion.getId());
+
+                migalleta.setMaxAge(99999); // 1 minuto
+                respuesta.addCookie(migalleta);
             }
+
+            Cookie[] cookies = peticion.getCookies();
+
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("idCookie")) {
+                        migalleta = cookie;
+                    }
+                }
+            }
+
+            
 
             respuesta.setContentType("text/html");
             PrintWriter salida = respuesta.getWriter();
@@ -38,7 +51,7 @@ public class Jorge_10_27_principal extends HttpServlet {
             salida.println("</FORM>");
 
             salida.println("<FORM align='left' ACTION='/Proyecto1/Jorge_10.27_compras' METHOD='POST'>");
-            salida.println("<INPUT TYPE='hidden' value='" + migalleta.getValue() + "' NAME='cookie'>");
+            salida.println("<INPUT TYPE='hidden' value='"+migalleta.getValue()+"' NAME='cookie'>");
             salida.println("<button type=''>Ver mis compras</button>");
             salida.println("</FORM>");
 
@@ -100,15 +113,15 @@ public class Jorge_10_27_principal extends HttpServlet {
         misesion = peticion.getSession(true);
         misesion.setMaxInactiveInterval(10);
 
-        Cookie migalleta;
-        Cookie[] misgalletas;
-        misgalletas = peticion.getCookies();
+        Cookie migalleta = null;
+        Cookie[] cookies = peticion.getCookies();
 
-        if (misgalletas == null) {
-            migalleta = new Cookie("id", misesion.getId());
-            migalleta.setMaxAge(999999999); // 1 minuto
-        } else {
-            migalleta = misgalletas[0];
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("idCookie")) {
+                    migalleta = cookie;
+                }
+            }
         }
 
         respuesta.setContentType("text/html");
@@ -151,7 +164,8 @@ public class Jorge_10_27_principal extends HttpServlet {
                     }
                 }
                 total += costeEnvio;
-                String consulta = "INSERT INTO envios (lista,total, idcookie) values ('" + nombre + "','" + total + "','" + migalleta.getValue() + "')";
+                String consulta = "INSERT INTO envios (lista,total, idcookie) values ('" + nombre + "','" + total
+                        + "','" + migalleta.getValue() + "')";
                 misentencia.executeUpdate(consulta);
 
                 miconexion.close();
@@ -190,7 +204,6 @@ public class Jorge_10_27_principal extends HttpServlet {
                 salida.println("<button type=''>Login</button>");
                 salida.println("</FORM>");
                 salida.println("<FORM align='left' ACTION='/Proyecto1/Jorge_10.27_compras' METHOD='POST'>");
-                salida.println("<INPUT TYPE='hidden' value='" + migalleta.getValue() + "' NAME='cookie'>");
                 salida.println("<button type=''>Ver mis compras</button>");
                 salida.println("</FORM>");
 
