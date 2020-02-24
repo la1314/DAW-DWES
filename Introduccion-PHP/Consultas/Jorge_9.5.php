@@ -10,7 +10,7 @@
 
 <body>
     <?php
-    $servidor = "192.168.4.65";
+    $servidor = "192.168.4.67";
     $username = "miusuario";
     $password = "mipassword";
     $basedatos = "bdprueba";

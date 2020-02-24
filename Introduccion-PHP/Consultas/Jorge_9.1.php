@@ -30,7 +30,7 @@
 <body>
 
     <?php
-    $servidor = "192.168.4.65"; # Puede ser una IP o un nombre DNS
+    $servidor = "192.168.4.67"; # Puede ser una IP o un nombre DNS
     $username = "miusuario";
     $password = "mipassword";
     $basedatos = "bdprueba";

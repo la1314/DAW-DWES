@@ -4,7 +4,7 @@ function ListarProductos()
 {
 
     // Conexión
-    $servidor = "192.168.4.65";
+    $servidor = "192.168.4.66";
     $username = "miusuario";
     $password = "mipassword";
     $basedatos = "bdprueba";
@@ -31,7 +31,7 @@ function ListarProductos()
 function ListarCarrito($consulta)
 {
     // Conexión
-    $servidor = "192.168.4.65";
+    $servidor = "192.168.4.66";
     $username = "miusuario";
     $password = "mipassword";
     $basedatos = "bdprueba";
@@ -49,7 +49,7 @@ function ListarCarrito($consulta)
 function GuardarEnvio()
 {
     // Conexión
-    $servidor = "192.168.4.65";
+    $servidor = "192.168.4.66";
     $username = "miusuario";
     $password = "mipassword";
     $basedatos = "bdprueba";

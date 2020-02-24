@@ -69,10 +69,10 @@
         {
             $this->lado = $lad;
         }
-       /*  public function obtenerArea()
+        public function obtenerArea()
         {
             return pow($this->lado, 2);
-        } */
+        } 
     }
 
     $miCirculo = new Circulo;

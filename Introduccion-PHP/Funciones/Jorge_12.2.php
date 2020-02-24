@@ -16,7 +16,7 @@
     // Función que devuelve una conexción establecida con el servidor
     function establecerConexcion()
     {
-        $servidor = "192.168.4.65";
+        $servidor = "192.168.4.67";
         $username = "miusuario";
         $password = "mipassword";
         $basedatos = "bdprueba";
